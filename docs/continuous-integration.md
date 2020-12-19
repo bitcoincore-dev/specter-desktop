@@ -2,12 +2,14 @@
 Specter-Desktop is using gitlab, Travis-CI and Github-Actions for continuous integration purposes but Github-actions only for Blackify so far. It might be more effort using more than one CI-approach but it makes us also more resilient. 
 Gitlab and Travis-CI have both advantages and disadvantages so ... let's use both!
 Gitlab:
+
 * is completely open Source for server- and clients
 * the gitlab-runner can run docker and is itself running on docker
 * but does not support Pull-Requests
 * needs to have bitcoind in a prepared docker-container which binds the build to that version
 
 Travis-CI:
+
 * supports the PR-model
 * quite easy to setup even without docker
 * enables to test against any specific version of bitcoind we would like to
@@ -29,6 +31,7 @@ https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-socket-b
 
 Due to that setup there are some specifics which are mainly addressed in tests/conftest 
 start_bitcoind-function:
+
 * some pytest specific stuff to enable "pytest --docker" (used in .gitlab-ci.yml)
 * adding -rpcallowip= (from a docker network) to bitcoind
 * not use localhost but the docker-network-ip-address when talking to the bitcoind
@@ -42,6 +45,7 @@ Travis-CI setup is very straightforward. As we're using the build-cache, the bit
 ## What gets released
 
 We're mostly releasing automatically. Currently the following artifacts are releasesd
+
 * specterd (daemon) is a binary for kicking off the specter-desktop service on the commandline. We have binaries for windows, linux and macos
 * We have an Electron-App which we're also releasing for windows, linux and macos. Unfortunately the macOS build is not yet automated
 * We release a pip-package
@@ -67,6 +71,7 @@ similiar to the way the innosetup is running within docker.
 # CI/CD-dev-env setup
 
 Here is a brief description on how to create a setup where the release-procedures can be tested:
+
 * We assume you have a fork of cryptoadvance/specter-desktop. We also assume that your gitlab-user-handle is the exact same then on github.
 * Create a gitlab-account and then a mirroring project ([here](https://gitlab.com/projects/new#cicd_for_external_repo)) obviously with the exact same name: "specter-desktop"
 * Activate the private runners and deactivate the public runners. Contact @k9ert for that.
@@ -98,6 +103,7 @@ Now open and check the "Environment-variables" and check that the following line
 ## Runner
 
 The runner itself is easy to [setup](https://docs.gitlab.com/runner/install/windows.html). Follow the link or this very brief description:
+
 *  `mkdir \Gitlab-Runner`
 * download [this binary](https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-amd64.exe) in that folder and rename to gitlab-runner.exe
 * Search for "powershell" in windows an open AS ADMINISTRATOR
