@@ -20,6 +20,7 @@ Let's look at all the issues which can potentially occur.
 # Potential connection issues
 
 The first thing you should do if it doesn't work out of the box is explicitely configuring the connection to Bitcoin Core. For that, there are the following values to be set:
+
 * Your Bitcoin RPC username is specified in your bitcoin.conf file on the computer where Bitcoin Core is running. If you open the file, it should like this: `rpcuser=bitcoin`
 * Your Bitcoin RPC password can also be found in that file. Search for `rpcpassword=aVerySecretPassword`
 * Your node's IP address could simply be `http://localhost` if you're running Bitcoin Core on the same machine as Specter. Otherwise, it's, as discussed above, a local network-address starting often enough with 192.168.X.Y.
@@ -42,6 +43,7 @@ Also you should check your bitcoin.conf. There could be several reasons why your
 ### localhost bind-only
 
 The rpc service needs to bind to the right IP address and port. If you're running Specter on the same machine than Core, something like this would be ok:
+
 ```
 rpcbind=127.0.0.1:8332
 ```
@@ -49,6 +51,7 @@ rpcbind=127.0.0.1:8332
 with rpcbind etc.)
 
 However, if you're running it on a different machine, you need to make your service available to the outside. That's done by:
+
 * binding it to all network interfaces like `rpcbind=0.0.0.0:8332`
 * and also allowing everyone (specifically your machine) to connect to it: `rpcallowip=0.0.0.0/0`
 
@@ -62,6 +65,7 @@ Often enough there are firewalls installed on the machines running services. Usu
 
 "ufw" is a popular and easy to use firewall (Raspiblitz is using it for example). 
 This is how you open the port:
+
 ```
 sudo ufw allow 8332
 sudo ufw enable
